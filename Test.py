@@ -10,7 +10,11 @@ class Measurement:
     def __init__(self, current, potential, color):
         self.current = list(map(float, current.split(',')))
         self.potential = list(map(float, potential.split(',')))
-        self.resistance = [self.potential[j] / self.current[j] for j in range(len(self.current))]
+        try:
+            self.resistance = [self.potential[j] / self.current[j] for j in range(len(self.current))]
+        except ZeroDivisionError:
+            self.resistance = None
+            pass
         self.color = color
 
 
